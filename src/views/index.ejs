@@ -1,0 +1,13 @@
+<%- include('./includes/head') %> 
+   <section class="container">
+    <h1>Loren Normal</h1>
+
+    <form action="" method="POST">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %> ">
+      <label>Cliente</label>
+      <input type="text" name="client">
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+<%- include('./includes/footer.ejs') %> 
