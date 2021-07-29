@@ -16,7 +16,11 @@ exports.register = async (req, res) => {
       });
       return;
     }
-  return res.send(login.user);
+
+    req.flash('success', 'Seu usuário foi criado com sucesso!');
+    req.session.save(function() {
+      return res.redirect('/login');
+    });
   } catch (e) {
     console.log(e)
     return res.render('404')
