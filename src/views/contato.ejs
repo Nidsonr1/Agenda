@@ -1,0 +1,40 @@
+<%- include('./includes/head') %> 
+<%- include('./includes/navbar.ejs') %> 
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+
+    <div class="col-lg-8 my-3">
+      <h1 class="display-1 text-center">Contato</h1>
+      <p class="text-center lead">Crie ou Edite seu contato abaixo:</p>
+      
+      <%- include('./includes/messages') %> 
+
+      <form action="/contato/register" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="mb-3">
+          <label>Nome</label>
+          <input value="<%= contact.name %>" type="text" class="form-control"  name="name">
+        </div>
+        <div class="mb-3">
+          <label>Sobrenome</label>
+          <input value="<%= contact.lastName %>" type="text" class="form-control"  name="lastName">
+        </div>
+        <div class="mb-3">
+          <label>Email</label>
+          <input value="<%= contact.email %>" type="email" class="form-control"  name="email">
+        </div>
+        <div class="mb-3">
+          <label>Telefone</label>
+          <input value="<%= contact.phone %>" type="tell" class="form-control"  name="phone">
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </form>
+    </div>
+    
+    <div class="col-lg-2"></div>
+  </div>
+</div>
+
+<%- include('./includes/footer') %>
