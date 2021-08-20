@@ -11,7 +11,11 @@
       
       <%- include('./includes/messages') %> 
 
-      <form action="/contato/register" method="POST">
+      <% if(contact._id) {%>
+         <form action="/contato/edit/<%= contact._id %>" method="POST">
+      <% } else {%>
+        <form action="/contato/register" method="POST">
+      <% } %>
         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="mb-3">
           <label>Nome</label>
@@ -27,7 +31,7 @@
         </div>
         <div class="mb-3">
           <label>Telefone</label>
-          <input value="<%= contact.phone %>" type="tell" class="form-control"  name="phone">
+          <input value="<%= contact.phone %>" type="text" class="form-control" id="phone" name="phone" data-mask="">
         </div>
         <button type="submit" class="btn btn-primary">Salvar</button>
       </form>
@@ -38,3 +42,8 @@
 </div>
 
 <%- include('./includes/footer') %>
+<script>
+  $(document).ready(function() {
+    $('#phone').mask('(00)00000-0000', {reverse: false})
+  })
+</script>

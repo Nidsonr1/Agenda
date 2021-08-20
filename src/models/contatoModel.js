@@ -52,6 +52,13 @@ Contato.prototype.cleanUp = function() {
     phone: this.body.phone,
     email: this.body.email,
   }
-}
+};
+
+Contato.prototype.edit = async function(id) {
+  if(typeof id !== 'string') return;
+  this.valida();
+  if(this.errors.length > 0) return;
+  this.contato = await ContatoModel.useFindAndModify(id, this.body, { new: true });
+};
 
 module.exports = Contato
