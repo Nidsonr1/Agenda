@@ -17,17 +17,14 @@ function Contato(body) {
   this.contato = null;
 }
 
+//Registra o contato
 Contato.prototype.register = async function() {
   this.valida();
   if(this.errors.length > 0) return;
   this.contato = await ContatoModel.create(this.body);
 }
 
-Contato.searchById = async function(id) {
-  const user = await ContatoModel.findById(id);
-  return user;
-}
-
+//Valida os campos
 Contato.prototype.valida = function() {
   this.cleanUp();
   
@@ -54,12 +51,29 @@ Contato.prototype.cleanUp = function() {
   }
 };
 
+//Edita um contato
 Contato.prototype.edit = async function(id) {
-  // if(typeof id !== 'string') return;
   this.valida();
   if(this.errors.length > 0) return;
   
   this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
 };
 
-module.exports = Contato
+/** Métodos Estáticos */
+Contato.searchById = async function(id) {
+  const contact = await ContatoModel.findById(id);
+  return contact;
+}
+
+Contato.searchContacts = async function() {
+  const contacts = await ContatoModel.find()
+    .sort({ createdAt: -1 });
+  return contacts;
+}
+
+Contato.delete = async function(id) {
+  const contact = await ContatoModel.findByIdAndDelete(id);
+  return contact;
+}
+
+module.exports = Contato;

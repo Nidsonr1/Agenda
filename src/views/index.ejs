@@ -11,29 +11,32 @@
 
 
       <%- include('./includes/messages') %> 
-
+      <% if(contacts.length > 0 ){ %> 
       <div class="responsive-table">
         <table class="table my-3">
-          <tr>
-            <td>Luiz</td>
-            <td>Otávio</td>
-            <td>(88)912345678</td>
-            <td>luiz.otavio@gmail.com</td>
-          </tr>
-          <tr>
-            <td>Luiz</td>
-            <td>Otávio</td>
-            <td>(88)912345678</td>
-            <td>luiz.otavio@gmail.com</td>
-          </tr>
-          <tr>
-            <td>Luiz</td>
-            <td>Otávio</td>
-            <td>(88)912345678</td>
-            <td>luiz.otavio@gmail.com</td>
-          </tr>
+          <th>Nome</th>
+          <th>Sobrenome</th>
+          <th>Número</th>
+          <th>Email</th>
+          <th class="center">Editar/Excluir</th>
+          <% contacts.forEach(contact => { %>
+            <tr>
+              <td><%= contact.name %></td>
+              <td><%= contact.lastName %></td>
+              <td><%= contact.phone %></td>
+              <td><%= contact.email %></td>
+              <td><%= contact._id %> </td>
+              <td>
+                <a href="/contato/<%= contact._id %>">Editar</a>
+                <a class="text-danger" href="/contato/delete/<%= contact._id %>">Excluir</a>
+              </td>
+            </tr>
+          <% })  %> 
         </table>
       </div>
+      <% } else { %>
+        <p class="text-center lead">Não Existe Contato na sua Agenda. Adicione novos Contatos em <strong>"Cadastrar Contato"</strong></p>
+      <% } %> 
     </div>
     
     <div class="col-lg-2"></div>
